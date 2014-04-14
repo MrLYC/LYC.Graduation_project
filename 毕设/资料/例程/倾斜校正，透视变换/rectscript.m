@@ -4,6 +4,7 @@ clc;
 
 img= imread('rect.bmp');
 img= rgb2gray(img);
+img = filter2(fspecial('sobel'),img);
 imshow(mat2gray(img));
 [M N] = size(img);
 
