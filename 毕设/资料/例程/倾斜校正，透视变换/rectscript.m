@@ -4,11 +4,11 @@ clc;
 
 img= imread('rect.bmp');
 img= rgb2gray(img);
-img = filter2(fspecial('sobel'),img);
-imshow(mat2gray(img));
+imshow(img);
 [M N] = size(img);
 
 dot=ginput();       %取四个点，依次是左上，右上，左下，右下,这里我取的是书的四个角
+disp(dot)
 w=round(sqrt((dot(1,1)-dot(2,1))^2+(dot(1,2)-dot(2,2))^2));     %从原四边形获得新矩形宽
 h=round(sqrt((dot(1,1)-dot(3,1))^2+(dot(1,2)-dot(3,2))^2));     %从原四边形获得新矩形高
 
