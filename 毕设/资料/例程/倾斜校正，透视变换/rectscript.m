@@ -2,7 +2,7 @@ clear all;
 close all;
 clc;
 
-img= imread('rect.jpg');
+img= imread('rect.bmp');
 img= rgb2gray(img);
 imshow(mat2gray(img));
 [M N] = size(img);
