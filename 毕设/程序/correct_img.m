@@ -46,13 +46,13 @@ delta_y=round(abs(min([pix1(1) pix2(1) pix3(1) pix4(1)])));            %È¡µÃy·½Ï
 delta_x=round(abs(min([pix1(2) pix2(2) pix3(2) pix4(2)])));            %È¡µÃx·½ÏòµÄ¸ºÖá³¬³öµÄÆ«ÒÆÁ¿
 inv_rot=inv(rot);
 
-for i = 1-delta_y:height-delta_y                        %´Ó±ä»»Í¼ÏñÖÐ·´ÏòÑ°ÕÒÔ­Í¼ÏñµÄµã£¬ÒÔÃâ³öÏÖ¿Õ¶´£¬ºÍÐý×ª·Å´óÔ­ÀíÒ»Ñù
-    for j = 1-delta_x:width-delta_x
-        pix=inv_rot*[i j 1]';       %ÇóÔ­Í¼ÏñÖÐ×ø±ê£¬ÒòÎª[YW XW W]=fa*[y x 1],ËùÒÔÕâÀïÇóµÄÊÇ[YW XW W],W=gy+hx+1;
+for i = 1:height+1                        %´Ó±ä»»Í¼ÏñÖÐ·´ÏòÑ°ÕÒÔ­Í¼ÏñµÄµã£¬ÒÔÃâ³öÏÖ¿Õ¶´£¬ºÍÐý×ª·Å´óÔ­ÀíÒ»Ñù
+    for j = 1:width+1
+        pix=inv_rot*[i-delta_y j+delta_x 1]';       %ÇóÔ­Í¼ÏñÖÐ×ø±ê£¬ÒòÎª[YW XW W]=fa*[y x 1],ËùÒÔÕâÀïÇóµÄÊÇ[YW XW W],W=gy+hx+1;
         pix=inv([g*pix(1)-1 h*pix(1);g*pix(2) h*pix(2)-1])*[-pix(1) -pix(2)]'; %Ïàµ±ÓÚ½â[pix(1)*(gy+hx+1) pix(2)*(gy+hx+1)]=[y x],ÕâÑùÒ»¸ö·½³Ì£¬ÇóyºÍx£¬×îºópix=[y x];
         
         if pix(1)>=0.5 && pix(2)>=0.5 && pix(1)<=M && pix(2)<=N
-            c_img(i+delta_y,j+delta_x)=img(round(pix(1)),round(pix(2)));     %×îÁÚ½ü²åÖµ,Ò²¿ÉÒÔÓÃË«ÏßÐÔ»òË«Á¢·½²åÖµ
+            c_img(i,j)=img(round(pix(1)),round(pix(2)));     %×îÁÚ½ü²åÖµ,Ò²¿ÉÒÔÓÃË«ÏßÐÔ»òË«Á¢·½²åÖµ
         end  
     end
 end
