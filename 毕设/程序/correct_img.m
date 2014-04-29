@@ -40,7 +40,7 @@ pix4=rot*[M N 1]'/(g*M+h*N+1);  %±ä»»ºóÍ¼ÏñÓÒÏÂµã
 
 height=round(max([pix1(1) pix2(1) pix3(1) pix4(1)])-min([pix1(1) pix2(1) pix3(1) pix4(1)]));     %±ä»»ºóÍ¼ÏñµÄ¸ß¶È
 width=round(max([pix1(2) pix2(2) pix3(2) pix4(2)])-min([pix1(2) pix2(2) pix3(2) pix4(2)]));      %±ä»»ºóÍ¼ÏñµÄ¿í¶È
-imgn=zeros(height,width);
+c_img=zeros(height,width);
 
 delta_y=round(abs(min([pix1(1) pix2(1) pix3(1) pix4(1)])));            %È¡µÃy·½ÏòµÄ¸ºÖá³¬³öµÄÆ«ÒÆÁ¿
 delta_x=round(abs(min([pix1(2) pix2(2) pix3(2) pix4(2)])));            %È¡µÃx·½ÏòµÄ¸ºÖá³¬³öµÄÆ«ÒÆÁ¿
@@ -52,8 +52,7 @@ for i = 1-delta_y:height-delta_y                        %´Ó±ä»»Í¼ÏñÖÐ·´ÏòÑ°ÕÒÔ­Í
         pix=inv([g*pix(1)-1 h*pix(1);g*pix(2) h*pix(2)-1])*[-pix(1) -pix(2)]'; %Ïàµ±ÓÚ½â[pix(1)*(gy+hx+1) pix(2)*(gy+hx+1)]=[y x],ÕâÑùÒ»¸ö·½³Ì£¬ÇóyºÍx£¬×îºópix=[y x];
         
         if pix(1)>=0.5 && pix(2)>=0.5 && pix(1)<=M && pix(2)<=N
-            imgn(i+delta_y,j+delta_x)=img(round(pix(1)),round(pix(2)));     %×îÁÚ½ü²åÖµ,Ò²¿ÉÒÔÓÃË«ÏßÐÔ»òË«Á¢·½²åÖµ
+            c_img(i+delta_y,j+delta_x)=img(round(pix(1)),round(pix(2)));     %×îÁÚ½ü²åÖµ,Ò²¿ÉÒÔÓÃË«ÏßÐÔ»òË«Á¢·½²åÖµ
         end  
     end
 end
-c_img = imgn
