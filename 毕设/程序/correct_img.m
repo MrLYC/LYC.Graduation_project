@@ -2,8 +2,16 @@ function [c_img] = correct_img(img, dot)
 %矫正矩形
 
 [M N] = size(img);
-w=round(sqrt((dot(1,1)-dot(2,1))^2+(dot(1,2)-dot(2,2))^2));     %从原四边形获得新矩形宽
-h=round(sqrt((dot(1,1)-dot(3,1))^2+(dot(1,2)-dot(3,2))^2));     %从原四边形获得新矩形高
+
+%从原四边形获得新矩形宽
+w1=sqrt((dot(1,1)-dot(2,1))^2+(dot(1,2)-dot(2,2))^2);
+w2=sqrt((dot(3,1)-dot(4,1))^2+(dot(3,2)-dot(4,2))^2);
+w=round((w1+w2)/2);
+
+%从原四边形获得新矩形高
+h1=sqrt((dot(1,1)-dot(3,1))^2+(dot(1,2)-dot(3,2))^2);
+h2=sqrt((dot(2,1)-dot(4,1))^2+(dot(2,2)-dot(4,2))^2);
+h=round((h1+h2)/2);
 
 y=[dot(1,1) dot(2,1) dot(3,1) dot(4,1)];        %四个原顶点
 x=[dot(1,2) dot(2,2) dot(3,2) dot(4,2)];
