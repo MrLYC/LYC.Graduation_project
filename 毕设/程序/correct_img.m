@@ -54,9 +54,9 @@ delta_y=round(min([pix1(1) pix2(1) pix3(1) pix4(1)]));            %取得y方向的负
 delta_x=round(min([pix1(2) pix2(2) pix3(2) pix4(2)]));            %取得x方向的负轴超出的偏移量
 inv_rot=inv(rot);
 
-for i = 1:height+1                        %从变换图像中反向寻找原图像的点，以免出现空洞，和旋转放大原理一样
-    for j = 1:width+1
-        pix=inv_rot*[i-delta_y j+delta_x 1]';       %求原图像中坐标，因为[YW XW W]=fa*[y x 1],所以这里求的是[YW XW W],W=gy+hx+1;
+for i = 1:height                        %从变换图像中反向寻找原图像的点，以免出现空洞，和旋转放大原理一样
+    for j = 1:width
+        pix=inv_rot*[i+delta_y j+delta_x 1]';       %求原图像中坐标，因为[YW XW W]=fa*[y x 1],所以这里求的是[YW XW W],W=gy+hx+1;
         pix=inv([g*pix(1)-1 h*pix(1);g*pix(2) h*pix(2)-1])*[-pix(1) -pix(2)]'; %相当于解[pix(1)*(gy+hx+1) pix(2)*(gy+hx+1)]=[y x],这样一个方程，求y和x，最后pix=[y x];
         
         if pix(1)>=0.5 && pix(2)>=0.5 && pix(1)<=M && pix(2)<=N
