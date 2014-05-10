@@ -12,5 +12,5 @@ if length(dot) >= 4
     img = correct_img(img, dot);
 
     figure;
-    imshow(uint8(img));
+    imshow(img);
 end
