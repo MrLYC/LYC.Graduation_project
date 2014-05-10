@@ -1,4 +1,4 @@
-function [imgn] = get_border(img)
-%±ﬂ‘µºÏ≤‚
+function [imgn] = preprocessing(img)
+%‘§¥¶¿Ì
 
 imgn = rgb2gray(img);
