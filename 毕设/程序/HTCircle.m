@@ -64,14 +64,7 @@ for i=1:ecount
                 (rows(i)-par1)^2+(cols(i)-par2)^2>(r_min+(par3-1)*step_r)^2-5)  
             hough_circle(rows(i),cols(i)) = 1;  
         end  
+        par3 = r_min+(par3-1)*step_r;  
+        para(:,k) = [par1,par2,par3]';  
     end  
-end  
-   
-% ´òÓ¡½á¹û  
-for k=1:length  
-    par3 = floor(index(k)/(m*n))+1;  
-    par2 = floor((index(k)-(par3-1)*(m*n))/m)+1;  
-    par1 = index(k)-(par3-1)*(m*n)-(par2-1)*m;  
-    par3 = r_min+(par3-1)*step_r;  
-    para(:,k) = [par1,par2,par3]';  
 end  
