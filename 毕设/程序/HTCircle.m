@@ -38,20 +38,26 @@ ecount = size(rows);
 % 将图像空间(x,y)对应到参数空间(a,b,r)  
 % a = x-r*cos(angle)  
 % b = y-r*sin(angle)  
+max_para = 0;
 for i=1:ecount  
     for r=1:size_r  
         for k=1:size_angle  
             a = round(rows(i)-(r_min+(r-1)*step_r)*cos(k*step_angle));  
             b = round(cols(i)-(r_min+(r-1)*step_r)*sin(k*step_angle));  
             if(a>0 && a<=m && b>0 && b<=n)  
-                hough_space(a,b,r) = hough_space(a,b,r)+1;  
+                val = hough_space(a,b,r)+1;
+                hough_space(a,b,r) = val;  
+                if(val > max_para)
+                    disp(val)
+                    max_para = val;
+                end
             end  
         end  
     end  
 end  
    
 % 搜索超过阈值的聚集点  
-max_para = max(max(max(hough_space)));  
+disp(max_para);
 index = find(hough_space>=max_para*p);  
 length = size(index);  
 for i=1:ecount  
