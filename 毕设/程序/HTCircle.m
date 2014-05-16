@@ -1,4 +1,4 @@
-function [hough_space,hough_circle,para] = HTCircle(BW,step_r,step_angle,r_min,r_max,p);  
+function [hough_space,para] = HTCircle(BW,step_r,step_angle,r_min,r_max,p);  
 %[HOUGH_SPACE,HOUGH_CIRCLE,PARA] = HOUGH_CIRCLE(BW,STEP_R,STEP_ANGLE,R_MAX,P)  
 %------------------------------算法概述-----------------------------  
 % 该算法通过a = x-r*cos(angle)，b = y-r*sin(angle)将圆图像中的边缘点  
@@ -54,16 +54,11 @@ end
 max_para = max(max(max(hough_space)));  
 index = find(hough_space>=max_para*p);  
 length = size(index);  
-hough_circle=zeros(m,n);  
 for i=1:ecount  
     for k=1:length  
         par3 = floor(index(k)/(m*n))+1;  
         par2 = floor((index(k)-(par3-1)*(m*n))/m)+1;  
         par1 = index(k)-(par3-1)*(m*n)-(par2-1)*m;  
-        if((rows(i)-par1)^2+(cols(i)-par2)^2<(r_min+(par3-1)*step_r)^2+5 && ...  
-                (rows(i)-par1)^2+(cols(i)-par2)^2>(r_min+(par3-1)*step_r)^2-5)  
-            hough_circle(rows(i),cols(i)) = 1;  
-        end  
         par3 = r_min+(par3-1)*step_r;  
         para(:,k) = [par1,par2,par3]';  
     end  
