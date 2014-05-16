@@ -48,7 +48,6 @@ for i=1:ecount
                 val = hough_space(a,b,r)+1;
                 hough_space(a,b,r) = val;  
                 if(val > max_para)
-                    disp(val)
                     max_para = val;
                 end
             end  
@@ -57,15 +56,16 @@ for i=1:ecount
 end  
    
 % 搜索超过阈值的聚集点  
-disp(max_para);
 index = find(hough_space>=max_para*p);  
 length = size(index);  
+div_mn = m*n;
 for i=1:ecount  
     for k=1:length  
-        par3 = floor(index(k)/(m*n))+1;  
-        par2 = floor((index(k)-(par3-1)*(m*n))/m)+1;  
-        par1 = index(k)-(par3-1)*(m*n)-(par2-1)*m;  
-        par3 = r_min+(par3-1)*step_r;  
-        para(:,k) = [par1,par2,par3]';  
+        ik = index(k);
+        par3 = floor(ik/div_mn);  
+        par2 = floor((ik-par3*div_mn)/m);  
+        par1 = ik-par3*div_mn-par2*m;  
+        par3 = r_min+par3*step_r;  
+        para(:,k) = [par1,par2+1,par3]';  
     end  
 end  
