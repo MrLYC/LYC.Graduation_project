@@ -3,40 +3,57 @@ function [rect] = HTRectangle(f, n)
 
 lines = HTLine(f, n);
 rect = [];
-idx = 1;
 
 size = length(lines);
+
+p_lines = [];
+v_lines = [];
+
 for i=1:size
-    la = lines(i);
-    for j=1:size
-        if(i == j)
-            continue;
-        end
+    l = lines(i);
+    x1 = l.point1(1);
+    y1 = l.point1(2);
+    x2 = l.point2(1);
+    y2 = l.point2(2);
+    
+    A = y2-y1;
+    B = x1-x2;
+    C = y1*B-x1*A;
+    
+    k = abs(A/B);
+    if (k < 0.02)
+        p_lines(:, end+1) = [A, B, C];
+    elseif(k > 57.29)
+        v_lines(:, end+1) = [A, B, C];
+    end    
+end
+
+p_l = length(p_lines);
+v_l = length(v_lines);
+
+p_i = combntns([1:p_l], 2);
+v_i = combntns([1:v_l], 2);
+
+rect = []
+
+for i=1:p_l
+    idx = p_i(i, :);
+    p1 = p_lines(1:3, idx(1));
+    p2 = p_lines(1:3, idx(2));
+    
+    for j=1:v_l
+        idx = v_i(j, :);
+        p3 = v_lines(1:3, idx(1));
+        p4 = v_lines(1:3, idx(2));
         
-        lb = lines(j);
-        
-        theta = abs(la.theta - lb.theta);
-        if(cos(theta) < 0.05)
-            x1 = la.point1(1);
-            y1 = la.point1(2);
-            x2 = la.point2(1);
-            y2 = la.point2(2);
-            x3 = lb.point1(1);
-            y3 = lb.point1(2);
-            x4 = lb.point2(1);
-            y4 = lb.point2(2);
-            
-            A1 = y2-y1;
-            B1 = x1-x2;
-            A2 = y4-y3;
-            B2 = x3-x4;
-            C1 = y1*B1-x1*A1;
-            C2 = y3*B2-x3*A2;
-            
-            Rs = inv([A1 B1;A2 B2]) * [C1 C2]';
-            rect{idx} = Rs';
-            idx = idx + 1;
-        end
+        r = [
+            inv([p1(1) p1(2);p3(1) p3(2)]) * [p1(3) p3(3)]
+            inv([p1(1) p1(2);p4(1) p4(2)]) * [p1(3) p4(3)]
+            inv([p2(1) p2(2);p3(1) p3(2)]) * [p2(3) p3(3)]
+            inv([p2(1) p2(2);p4(1) p4(2)]) * [p2(3) p4(3)]
+        ]
+        rect(:, end+1) = r;
     end
 end
+
 end
