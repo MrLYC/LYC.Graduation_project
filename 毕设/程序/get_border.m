@@ -1,5 +1,5 @@
-function [img] = get_border(img)
+function [img] = get_border(img, size)
 %Ô¤´¦Àí
 
 img = edge(img,'sobel');
-img = imdilate(img,ones(3));%¼Ó¿í±ßÔµ
+img = imdilate(img,ones(size));%¼Ó¿í±ßÔµ
