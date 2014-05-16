@@ -9,6 +9,9 @@ size = length(lines);
 p_lines = [];
 v_lines = [];
 
+p_l = 0;
+v_l = 0;
+
 for i=1:size
     l = lines(i);
     x1 = l.point1(1);
@@ -23,35 +26,34 @@ for i=1:size
     k = abs(A/B);
     if (k < 0.02)
         p_lines(:, end+1) = [A, B, C];
+        p_l = p_l + 1;
     elseif(k > 57.29)
         v_lines(:, end+1) = [A, B, C];
+        v_l = v_l + 1;
     end    
 end
-
-p_l = length(p_lines);
-v_l = length(v_lines);
 
 p_i = combntns([1:p_l], 2);
 v_i = combntns([1:v_l], 2);
 
-rect = []
+rect = [];
 
-for i=1:p_l
+for i=1:p_l-1
     idx = p_i(i, :);
     p1 = p_lines(1:3, idx(1));
     p2 = p_lines(1:3, idx(2));
     
-    for j=1:v_l
+    for j=1:v_l-1
         idx = v_i(j, :);
         p3 = v_lines(1:3, idx(1));
         p4 = v_lines(1:3, idx(2));
         
         r = [
-            inv([p1(1) p1(2);p3(1) p3(2)]) * [p1(3) p3(3)]
-            inv([p1(1) p1(2);p4(1) p4(2)]) * [p1(3) p4(3)]
-            inv([p2(1) p2(2);p3(1) p3(2)]) * [p2(3) p3(3)]
-            inv([p2(1) p2(2);p4(1) p4(2)]) * [p2(3) p4(3)]
-        ]
+            inv([p1(1) p1(2);p3(1) p3(2)]) * [p1(3) p3(3)]'
+            inv([p1(1) p1(2);p4(1) p4(2)]) * [p1(3) p4(3)]'
+            inv([p2(1) p2(2);p3(1) p3(2)]) * [p2(3) p3(3)]'
+            inv([p2(1) p2(2);p4(1) p4(2)]) * [p2(3) p4(3)]'
+        ];
         rect(:, end+1) = r;
     end
 end
