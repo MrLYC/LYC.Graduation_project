@@ -29,10 +29,10 @@ for i=1:lsize
     
     k = abs(A/B);
     if (k < 0.02)
-        p_lines(:, end+1) = [A, B, C];
+        p_lines(:, end+1) = [A, B, C, sqrt(A*A+B*B)];
         p_l = p_l + 1;
     elseif(k > 57.29)
-        v_lines(:, end+1) = [A, B, C];
+        v_lines(:, end+1) = [A, B, C, sqrt(A*A+B*B)];
         v_l = v_l + 1;
     end    
 end
@@ -57,17 +57,17 @@ for i=1:p_l-1
         p4 = v_lines(1:3, idx(2));
         
         r = [
-            inv([-p1(1) -p1(2);-p3(1) -p3(2)]) * [p1(3) p3(3)]'
             inv([-p1(1) -p1(2);-p4(1) -p4(2)]) * [p1(3) p4(3)]'
-            inv([-p2(1) -p2(2);-p3(1) -p3(2)]) * [p2(3) p3(3)]'
+            inv([-p1(1) -p1(2);-p3(1) -p3(2)]) * [p1(3) p3(3)]'
             inv([-p2(1) -p2(2);-p4(1) -p4(2)]) * [p2(3) p4(3)]'
+            inv([-p2(1) -p2(2);-p3(1) -p3(2)]) * [p2(3) p3(3)]'
         ];
     
         flag = true;
         for k=1:2:length(r)
-            a = round(r(k))
-            b = round(r(k+1))
-            if (a <= 0 || a >= rows || b <= 0 || b >= cols || img(a,b) > 3)
+            a = round(r(k));
+            b = round(r(k+1));
+            if (a <= 0 || a >= rows || b <= 0 || b >= cols)
                 flag = false;
                 break;
             end
