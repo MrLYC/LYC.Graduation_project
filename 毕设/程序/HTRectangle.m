@@ -5,6 +5,9 @@ lines = HTLine(f, n);
 rect = [];
 
 size = length(lines);
+if(size == 0)
+    return ;
+end
 
 p_lines = [];
 v_lines = [];
@@ -21,7 +24,7 @@ for i=1:size
     
     A = y2-y1;
     B = x1-x2;
-    C = y1*B-x1*A;
+    C = -y1*B-x1*A;
     
     k = abs(A/B);
     if (k < 0.02)
@@ -31,6 +34,10 @@ for i=1:size
         v_lines(:, end+1) = [A, B, C];
         v_l = v_l + 1;
     end    
+end
+
+if(p_l < 2 || v_l < 2)
+    return ;
 end
 
 p_i = combntns([1:p_l], 2);
@@ -49,12 +56,15 @@ for i=1:p_l-1
         p4 = v_lines(1:3, idx(2));
         
         r = [
-            inv([p1(1) p1(2);p3(1) p3(2)]) * [p1(3) p3(3)]'
-            inv([p1(1) p1(2);p4(1) p4(2)]) * [p1(3) p4(3)]'
-            inv([p2(1) p2(2);p3(1) p3(2)]) * [p2(3) p3(3)]'
-            inv([p2(1) p2(2);p4(1) p4(2)]) * [p2(3) p4(3)]'
+            inv([-p1(1) -p1(2);-p3(1) -p3(2)]) * [p1(3) p3(3)]'
+            inv([-p1(1) -p1(2);-p4(1) -p4(2)]) * [p1(3) p4(3)]'
+            inv([-p2(1) -p2(2);-p3(1) -p3(2)]) * [p2(3) p3(3)]'
+            inv([-p2(1) -p2(2);-p4(1) -p4(2)]) * [p2(3) p4(3)]'
         ];
-        rect(:, end+1) = r;
+        flag = true;
+        if (flag)
+            rect(:, end+1) = r;
+        end
     end
 end
 
