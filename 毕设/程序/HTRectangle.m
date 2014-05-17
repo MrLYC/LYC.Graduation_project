@@ -1,11 +1,12 @@
-function [rect] = HTRectangle(f, n)
+function [rect] = HTRectangle(img, n)
 %ªÙ∑Ú±‰ªªºÏ≤‚æÿ’Û
 
-lines = HTLine(f, n);
+[rows cols] = size(img);
+lines = HTLine(img, n);
 rect = [];
 
-size = length(lines);
-if(size == 0)
+lsize = length(lines);
+if(lsize == 0)
     return ;
 end
 
@@ -15,7 +16,7 @@ v_lines = [];
 p_l = 0;
 v_l = 0;
 
-for i=1:size
+for i=1:lsize
     l = lines(i);
     x1 = l.point1(1);
     y1 = l.point1(2);
@@ -61,7 +62,17 @@ for i=1:p_l-1
             inv([-p2(1) -p2(2);-p3(1) -p3(2)]) * [p2(3) p3(3)]'
             inv([-p2(1) -p2(2);-p4(1) -p4(2)]) * [p2(3) p4(3)]'
         ];
+    
         flag = true;
+        for k=1:2:length(r)
+            a = round(r(k))
+            b = round(r(k+1))
+            if (a <= 0 || a >= rows || b <= 0 || b >= cols || img(a,b) > 3)
+                flag = false;
+                break;
+            end
+        end
+        
         if (flag)
             rect(:, end+1) = r;
         end
