@@ -13,7 +13,7 @@ if length(dot) >= 4
     img = get_border(img, 2);
 
     figure;
-    [hough_space,hough_circle,para] = HTCircle(img,2,0.10,94,188,0.5);
+    [H c] = HTCircle(img,10,0.5,94,188,0.7);
     
     imshow(img);
 end
