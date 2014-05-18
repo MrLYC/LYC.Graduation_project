@@ -34,9 +34,15 @@ ecount = size(rows);
 max_para = 0;
 for i=1:ecount
     for r=1:size_r
-        for k=1:size_angle
-            a = round(rows(i)-(r_min+(r-1)*step_r)*cos(k*step_angle));
-            b = round(cols(i)-(r_min+(r-1)*step_r)*sin(k*step_angle));
+        x = rows(i);
+        y = cols(i);
+        if (BW(x,y) == 0)
+            continue;
+        end
+        for k=1:step_angle:size_angle
+            rt = (r_min+(r-1)*step_r);
+            a = round(x-rt*cos(k));
+            b = round(y-rt*sin(k));
             if(a>0 && a<=m && b>0 && b<=n)
                 val = hough_space(a,b,r)+1;
                 hough_space(a,b,r) = val;
