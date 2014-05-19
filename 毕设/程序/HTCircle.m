@@ -1,4 +1,4 @@
-function [hough_space,para] = HTCircle(BW,step_r,step_angle,r_min,r_max,p);
+function [para] = HTCircle(BW,step_r,step_angle,r_min,r_max,p);
 %[HOUGH_SPACE,HOUGH_CIRCLE,PARA] = HOUGH_CIRCLE(BW,STEP_R,STEP_ANGLE,R_MAX,P)
 %------------------------------算法概述-----------------------------
 % 该算法通过a = x-r*cos(angle)，b = y-r*sin(angle)将圆图像中的边缘?
