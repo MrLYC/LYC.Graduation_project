@@ -13,5 +13,10 @@ if length(dot) >= 4
     circ = HTCircle(img,10,0.5,94,188,0.7);
     rect = HTRectangle(img, 10);
     
+    figure;
     imshow(img);
+    hold on;
+    
+    MarkCircle(circ);
+    MarkRectangle(rect);
 end
