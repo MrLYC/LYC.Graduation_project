@@ -68,7 +68,7 @@ for i=1:p_l-1
         for k=1:2:length(r)
             a = round(r(k+1));
             b = round(r(k));
-            if (a <= 0 || a >= rows || b <= 0 || b >= cols || sum(img(a-3:a+3,b)) < 2 || sum(img(a,b-3:b+3)) < 2)
+            if (a <= 0 || a >= rows || b <= 0 || b >= cols || sum(img(a-2:a+2,b)) < 1 || sum(img(a,b-2:b+2)) < 1)
                 flag = false;
                 break;
             end
