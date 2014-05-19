@@ -57,17 +57,18 @@ for i=1:p_l-1
         p4 = v_lines(1:3, idx(2));
         
         r = [
-            inv([-p1(1) -p1(2);-p4(1) -p4(2)]) * [p1(3) p4(3)]'
             inv([-p1(1) -p1(2);-p3(1) -p3(2)]) * [p1(3) p3(3)]'
-            inv([-p2(1) -p2(2);-p4(1) -p4(2)]) * [p2(3) p4(3)]'
+            inv([-p1(1) -p1(2);-p4(1) -p4(2)]) * [p1(3) p4(3)]'
             inv([-p2(1) -p2(2);-p3(1) -p3(2)]) * [p2(3) p3(3)]'
+            inv([-p2(1) -p2(2);-p4(1) -p4(2)]) * [p2(3) p4(3)]'
         ];
     
         flag = true;
+        para = [];
         for k=1:2:length(r)
-            a = round(r(k));
-            b = round(r(k+1));
-            if (a <= 0 || a >= rows || b <= 0 || b >= cols)
+            a = round(r(k+1));
+            b = round(r(k));
+            if (a <= 0 || a >= rows || b <= 0 || b >= cols || sum(img(a-3:a+3,b)) < 2 || sum(img(a,b-3:b+3)) < 2)
                 flag = false;
                 break;
             end
