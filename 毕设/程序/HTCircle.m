@@ -63,7 +63,7 @@ div_mn = m*n;
 for k=1:length
     ik = index(k);
     par3 = floor(ik/div_mn);
-    par2 = floor((ik-par3*div_mn)/m);
+    par2 = round((ik-par3*div_mn)/m);
     par1 = ik-par3*div_mn-par2*m;
     par3 = r_min+par3*step_r;
     
