@@ -50,8 +50,14 @@ for i=1:ecount
         end
     end
 end
-% 搜索超过阈值的聚集?
-index = find(hough_space>=max_para*p);
+
+para = [];
+if (max_para < p)
+    return;
+end
+
+% 搜索超过阈值的聚集
+index = find(hough_space>=p);
 length = size(index);
 div_mn = m*n;
 for i=1:ecount
