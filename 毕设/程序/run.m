@@ -10,7 +10,7 @@ if length(dot) >= 4
     img = get_border(img, 3);
 
     figure;
-    circ = HTCircle(img,10,0.5,94,188,15);
+    circ = HTCircle(img,5,0.5,94,188,17);
     rect = HTRectangle(img, 10);
     
     figure;
