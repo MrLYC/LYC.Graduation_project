@@ -62,10 +62,11 @@ length = size(index);
 div_mn = m*n;
 for k=1:length
     ik = index(k);
-    par3 = floor(ik/div_mn);
-    par2 = round((ik-par3*div_mn)/m);
-    par1 = ik-par3*div_mn-par2*m;
-    par3 = r_min+par3*step_r;
+    sq = floor(ik/div_mn);
+    md = sq*div_mn;
+    par2 = round((ik-md)/m);
+    par1 = ik-md-par2*m;
+    par3 = r_min+sq*step_r;
     
     para(:,k) = [par2+1,par1,par3]';
 end
