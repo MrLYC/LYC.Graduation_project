@@ -36,9 +36,6 @@ for i=1:ecount
     for r=1:size_r
         x = rows(i);
         y = cols(i);
-        if (BW(x,y) == 0)
-            continue;
-        end
         for k=1:step_angle:size_angle
             rt = (r_min+(r-1)*step_r);
             a = round(x-rt*cos(k));
