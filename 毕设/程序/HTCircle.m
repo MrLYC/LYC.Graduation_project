@@ -54,7 +54,7 @@ for x=1:m
     end
 end
 
-circ = [];
+circ = {};
 if (max_circ < p)
     return;
 end
@@ -71,5 +71,5 @@ for k=1:length
     par1 = ik-md-par2*m;
     par3 = r_min+sq*step_r;
     
-    circ(:,k) = [par2+1,par1,par3]';
+    circ{end+1} = struct('x0',par2+1,'y0',par1,'r',par3);
 end
