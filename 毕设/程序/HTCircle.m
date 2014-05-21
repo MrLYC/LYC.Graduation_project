@@ -36,8 +36,8 @@ for x=1:m
             continue;
         end
         for r=1:size_r
+            rt = (r_min+(r-1)*step_r);
             for k=1:step_angle:size_angle
-                rt = (r_min+(r-1)*step_r);
                 a = round(x-rt*cos(k));
                 b = round(y-rt*sin(k));
                 if(a>0 && a<=m && b>0 && b<=n)
