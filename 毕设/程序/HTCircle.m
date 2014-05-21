@@ -25,29 +25,30 @@ function [para] = HTCircle(BW,step_r,step_angle,r_min,r_max,p);
 size_r = round((r_max-r_min)/step_r)+1;
 size_angle = round(2*pi/step_angle);
 hough_space = zeros(m,n,size_r);
-[rows,cols] = find(BW);
-ecount = size(rows);
 % Hough变换
 % 将图像空间(x,y)对应到参数空间(a,b,r)
 % a = x-r*cos(angle)
 % b = y-r*sin(angle)
 max_para = 0;
-for i=1:ecount
-    for r=1:size_r
-        x = rows(i);
-        y = cols(i);
-        for k=1:step_angle:size_angle
-            rt = (r_min+(r-1)*step_r);
-            a = round(x-rt*cos(k));
-            b = round(y-rt*sin(k));
-            if(a>0 && a<=m && b>0 && b<=n)
-                val = hough_space(a,b,r)+1;
-                hough_space(a,b,r) = val;
-                if(val > max_para)
-                    max_para = val;
+for x=1:m
+    for y=1:n
+        if (BW(x,y) == 0)
+            continue;
+        end
+        for r=1:size_r
+            for k=1:step_angle:size_angle
+                rt = (r_min+(r-1)*step_r);
+                a = round(x-rt*cos(k));
+                b = round(y-rt*sin(k));
+                if(a>0 && a<=m && b>0 && b<=n)
+                    val = hough_space(a,b,r)+1;
+                    hough_space(a,b,r) = val;
+                    if(val > max_para)
+                        max_para = val;
+                    end
                 end
             end
-        end
+    	end
     end
 end
 
