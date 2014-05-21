@@ -69,7 +69,7 @@ for i=1:p_l-1
                 para = {};
                 break;
             end
-            para{end+1} = struct('x',b,'y',a)
+            para{end+1} = struct('x',b,'y',a);
         end
         
         if (length(para) == 4)

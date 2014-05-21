@@ -6,7 +6,7 @@ function [] = MarkRectangle(rect)
         r = rect{i};
         M = length(r);
         for k=1:M
-            p = r{k}
+            p = r{k};
             plot(p.x,p.y,'x','LineWidth',4,'Color','r'); 
         end
     end
