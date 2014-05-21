@@ -1,13 +1,13 @@
 function [] = MarkRectangle(rect)
 %±ê¼Ç¾ØÐÎ
-    [M N] = size(rect);
+    L = length(rect);
     
-    for i=1:N
-        for k=1:2:M
-            x = rect(k, i);
-            y = rect(k+1, i);
-            
-            plot(x,y,'x','LineWidth',4,'Color','r'); 
+    for i=1:L
+        r = rect{i};
+        M = length(r);
+        for k=1:M
+            p = r{k}
+            plot(p.x,p.y,'x','LineWidth',4,'Color','r'); 
         end
     end
 end

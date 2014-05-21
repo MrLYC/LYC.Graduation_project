@@ -3,15 +3,15 @@ function [H rect] = HTRectangle(img, n)
 
 [rows cols] = size(img);
 [H lines] = HTLine(img, n);
-rect = [];
+rect = {};
 
 lsize = length(lines);
 if(lsize == 0)
     return ;
 end
 
-p_lines = [];
-v_lines = [];
+p_lines = {};
+v_lines = {};
 
 p_l = 0;
 v_l = 0;
@@ -29,10 +29,10 @@ for i=1:lsize
     
     k = abs(A/B);
     if (k < 0.02)
-        p_lines(:, end+1) = [A, B, C, sqrt(A*A+B*B)];
+        p_lines{end+1} = struct('A',A,'B',B,'C',C);
         p_l = p_l + 1;
     elseif(k > 57.29)
-        v_lines(:, end+1) = [A, B, C, sqrt(A*A+B*B)];
+        v_lines{end+1} = struct('A',A,'B',B,'C',C);
         v_l = v_l + 1;
     end    
 end
@@ -44,38 +44,36 @@ end
 p_i = combntns([1:p_l], 2);
 v_i = combntns([1:v_l], 2);
 
-rect = [];
-
 for i=1:p_l-1
     idx = p_i(i, :);
-    p1 = p_lines(1:3, idx(1));
-    p2 = p_lines(1:3, idx(2));
+    p1 = p_lines{idx(1)};
+    p2 = p_lines{idx(2)};
     
     for j=1:v_l-1
         idx = v_i(j, :);
-        p3 = v_lines(1:3, idx(1));
-        p4 = v_lines(1:3, idx(2));
-        
+        p3 = v_lines{idx(1)};
+        p4 = v_lines{idx(2)};
+
         r = [
-            inv([-p1(1) -p1(2);-p3(1) -p3(2)]) * [p1(3) p3(3)]'
-            inv([-p1(1) -p1(2);-p4(1) -p4(2)]) * [p1(3) p4(3)]'
-            inv([-p2(1) -p2(2);-p3(1) -p3(2)]) * [p2(3) p3(3)]'
-            inv([-p2(1) -p2(2);-p4(1) -p4(2)]) * [p2(3) p4(3)]'
+            inv([-p1.A -p1.B;-p3.A -p3.B]) * [p1.C p3.C]';
+            inv([-p1.A -p1.B;-p4.A -p4.B]) * [p1.C p4.C]';
+            inv([-p2.A -p2.B;-p3.A -p3.B]) * [p2.C p3.C]';
+            inv([-p2.A -p2.B;-p4.A -p4.B]) * [p2.C p4.C]';
         ];
     
-        flag = true;
-        para = [];
+        para = {};
         for k=1:2:length(r)
             a = round(r(k+1));
             b = round(r(k));
             if (a <= 0 || a >= rows || b <= 0 || b >= cols || sum(img(a-2:a+2,b)) < 1 || sum(img(a,b-2:b+2)) < 1)
-                flag = false;
+                para = {};
                 break;
             end
+            para{end+1} = struct('x',b,'y',a)
         end
         
-        if (flag)
-            rect(:, end+1) = r;
+        if (length(para) == 4)
+            rect{end+1} = para;
         end
     end
 end
