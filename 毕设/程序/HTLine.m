@@ -1,4 +1,4 @@
-function [lines] = HTLine(f, n)
+function [H lines] = HTLine(f, n)
 %ªÙ∑Ú±‰ªªºÏ≤‚÷±œﬂ
 
 [H, theta, rho] = hough(f); 

@@ -1,8 +1,8 @@
-function [rect] = HTRectangle(img, n)
+function [H rect] = HTRectangle(img, n)
 %ªÙ∑Ú±‰ªªºÏ≤‚æÿ’Û
 
 [rows cols] = size(img);
-lines = HTLine(img, n);
+[H lines] = HTLine(img, n);
 rect = [];
 
 lsize = length(lines);

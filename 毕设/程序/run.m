@@ -10,8 +10,8 @@ if length(dot) >= 4
     img = get_border(img, 3);
 
     figure;
-    circ = HTCircle(img,1,0.5,130,140,23);
-    rect = HTRectangle(img, 10);
+    [Hc circ] = HTCircle(img,1,0.5,130,140,23);
+    [Hr rect] = HTRectangle(img, 10);
     
     figure;
     imshow(img);
