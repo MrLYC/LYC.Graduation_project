@@ -35,11 +35,13 @@ for x=1:m
         if (BW(x,y) == 0)
             continue;
         end
-        for r=1:size_r
-            rt = (r_min+(r-1)*step_r);
-            for k=1:step_angle:size_angle
-                a = round(x-rt*cos(k));
-                b = round(y-rt*sin(k));
+        for k=1:step_angle:size_angle
+            ck = cos(k);
+            sk = sin(k);
+            for r=1:size_r
+                rt = (r_min+(r-1)*step_r);
+                a = round(x-rt*ck);
+                b = round(y-rt*sk);
                 if(a>0 && a<=m && b>0 && b<=n)
                     val = hough_space(a,b,r)+1;
                     hough_space(a,b,r) = val;
