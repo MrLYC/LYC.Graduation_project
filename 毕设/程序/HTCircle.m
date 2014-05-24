@@ -35,14 +35,16 @@ if (max_p < p)
     return;
 end
 
-for a=1:rows
-    for b=1:cols
-        for r=1:size_r
-            if (H(a,b,r) < p)
-                continue;
-            end
-            circ{end+1} = struct('x0', a, 'y0', b, 'r', r);
-        end
-    end
-end
+index = find(H>=p);
+length = size(index);
+div_mn = rows*cols;
+for k=1:length
+    ik = index(k);
+    sq = floor(ik/div_mn);
+    md = ik-sq*div_mn;
+    x0 = floor(md/rows);
+    y0 = md-x0*rows;
+    r0 = min_r+sq*step_r;
+    
+    circ{end+1} = struct('x0', x0+1, 'y0', y0, 'r', r0);
 end
