@@ -1,3 +1,6 @@
+clear all;
+close all;
+clc;
 
 img = imread('3.jpg');
 
@@ -13,7 +16,6 @@ if length(dot) >= 4
     [Hc circ] = HTCircle(img,1,0.5,130,140,25);
     [Hr rect] = HTRectangle(img, 10);
     
-    figure;
     imshow(img);
     hold on;
     
