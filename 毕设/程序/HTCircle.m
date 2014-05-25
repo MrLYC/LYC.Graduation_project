@@ -1,7 +1,7 @@
-function [H circ] = HTCircle(img, step_r, step_angle, min_r, max_r, p)
+function [H circ] = HTCircle(img, step_angle, min_r, max_r, p)
 %»ô·ò±ä»»¼ì²âÔ²
 [rows cols] = size(img);
-size_r = round((max_r-min_r)/step_r)+1;
+size_r = round(max_r-min_r)+1;
 size_angle = round(2*pi/step_angle);
 H = zeros(rows, cols, size_r);
 
@@ -15,7 +15,7 @@ for x=1:rows
             ck = cos(k);
             sk = sin(k);
             for r=1:size_r
-                rt = (min_r+(r-1)*step_r);
+                rt = (min_r+(r-1));
                 a = round(x-rt*ck);
                 b = round(y-rt*sk);
                 if(a>0 && a<=rows && b>0 && b<=cols)
@@ -44,7 +44,7 @@ for k=1:length
     md = ik-sq*div_mn;
     x0 = floor(md/rows);
     y0 = md-x0*rows;
-    r0 = min_r+sq*step_r;
+    r0 = min_r+sq;
     
     circ{end+1} = struct('x0', x0+1, 'y0', y0, 'r', r0);
 end

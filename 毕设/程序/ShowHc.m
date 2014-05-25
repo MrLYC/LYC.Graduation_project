@@ -1,4 +1,4 @@
-function [n] = ShowHc(Hc, p)
+function [n] = ShowHc(Hc, p, min_r)
 %显示圆形的霍夫空间
 r1 = [];
 r2 = [];
@@ -20,5 +20,5 @@ for i=1:a
 end
 
 figure('NumberTitle', 'off', 'Name', '圆形的霍夫空间');
-scatter3(r1, r2, r3);
+scatter3(r1, r2, r3+min_r, 'filled');
 end

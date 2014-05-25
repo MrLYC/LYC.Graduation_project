@@ -14,7 +14,7 @@ if length(dot) >= 4
     img = get_border(img, 3);
 
     figure('NumberTitle', 'off', 'Name', '¼ì²â½á¹û');
-    [Hc circ] = HTCircle(img,1,0.5,130,140,25);
+    [Hc circ] = HTCircle(img, 0.5, 130, 140, 25);
     [Hr rect] = HTRectangle(img, 10);
     
     imshow(img);
@@ -25,6 +25,6 @@ if length(dot) >= 4
     
     hold off;
     
-    ShowHc(Hc,20);
-    ShowHr(Hr,100);
+    ShowHc(Hc,20, 130);
+    ShowHr(Hr,200);
 end
