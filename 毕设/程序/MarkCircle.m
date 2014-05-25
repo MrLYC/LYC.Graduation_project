@@ -4,6 +4,10 @@ function [] = MarkCircle(circ)
     for i=1:M
         c = circ{i};
         plot(c.x0,c.y0,'x','LineWidth',2,'Color','b'); 
-        plot(c.x0,c.y0,'ko','LineWidth',2,'MarkerSize',c.r,'Color','c');
+        alpha=0:pi/50:2*pi;
+        
+        x=c.r*cos(alpha) + c.x0; 
+        y=c.r*sin(alpha) + c.y0; 
+        plot(x,y,'LineWidth',2,'Color','c');
     end
 end
