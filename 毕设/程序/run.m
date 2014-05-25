@@ -7,7 +7,8 @@ img = imread('3.jpg');
 figure('NumberTitle', 'off', 'Name', '请选择顶点');
 imshow(img);
 title('取左上，右上，左下，右下四个点');
-dot=ginput();       %取四个点，依次是左上，右上，左下，右下,这里我取的是书的四个角
+dot=ginput();       %取四个点，依次是左上，右上，左下，右下
+close;
 
 if length(dot) >= 4
     img = preprocessing(img);
