@@ -10,8 +10,8 @@ for i=1:a
     for j=1:b
         for k=1:c
             if (Hc(i, j, k) >= p)
-                r1(end+1) = i;
-                r2(end+1) = j;
+                r1(end+1) = j;
+                r2(end+1) = i;
                 r3(end+1) = k;
                 n = n + 1;
             end
@@ -21,4 +21,8 @@ end
 
 figure('NumberTitle', 'off', 'Name', '圆形的霍夫空间');
 scatter3(r1, r2, r3+min_r, 'filled');
+xlabel('x');
+ylabel('y');
+zlabel('r');
+title(['阈值：' num2str(p)]);
 end

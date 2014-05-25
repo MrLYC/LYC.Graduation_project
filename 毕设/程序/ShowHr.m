@@ -15,4 +15,8 @@ end
 
 figure('NumberTitle', 'off', 'Name', '直线的霍夫空间');
 meshz(Mk);
+xlabel('ρ');
+ylabel('θ');
+zlabel('val');
+title(['阈值：' num2str(p)]);
 end
