@@ -36,6 +36,7 @@ img = get_border(img, 3);
 
 figure('NumberTitle', 'off', 'Name', '¼ì²â½á¹û');
 imshow(img);
+drawnow;
 hold on;
 
 [Hc circ] = HTCircle(img, 0.5, min_r, max_r, pc);
