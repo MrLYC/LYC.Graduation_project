@@ -43,7 +43,8 @@ end
 figure('NumberTitle', 'off', 'Name', '请选择顶点');
 imshow(img);
 title('取左上，右上，左下，右下四个点');
-dot=ginput(4);       %取四个点，依次是左上，右上，左下，右下
+axis on;
+dot=ginput(4);
 close;
 drawnow;
 
@@ -63,6 +64,7 @@ img = get_border(img, 3);
 
 figure('NumberTitle', 'off', 'Name', '检测结果');
 imshow(img);
+axis on;
 drawnow;
 hold on;
 
