@@ -2,7 +2,8 @@ clear all;
 close all;
 clc;
 
-img = imread('3.jpg');
+[FileName,PathName,FilterIndex] = uigetfile('*.jpg;*.tif;*.png;*.bmp','All Image Files''*.*','All Files');
+img = imread(FileName);
 
 figure('NumberTitle', 'off', 'Name', '«Î—°‘Ò∂•µ„');
 imshow(img);
