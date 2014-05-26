@@ -12,6 +12,14 @@ path = fullfile(pathname, filename)
 
 img = imread(path);
 
+min_r = input('圆形半径搜索下限：');
+max_r = input('圆形半径搜索上限：');
+
+lnum = input('待检测直线数目：');
+
+pc = input('待检测圆形阈值：');
+pr = input('待检测矩形阈值：');
+
 figure('NumberTitle', 'off', 'Name', '请选择顶点');
 imshow(img);
 title('取左上，右上，左下，右下四个点');
@@ -27,16 +35,16 @@ img = correct_img(img, dot);
 img = get_border(img, 3);
 
 figure('NumberTitle', 'off', 'Name', '检测结果');
-[Hc circ] = HTCircle(img, 0.5, 130, 140, 25);
-[Hr rect] = HTRectangle(img, 10);
-
 imshow(img);
 hold on;
+
+[Hc circ] = HTCircle(img, 0.5, min_r, max_r, pc);
+[Hr rect] = HTRectangle(img, lnum);
 
 MarkCircle(circ);
 MarkRectangle(rect);
 
 hold off;
 
-ShowHc(Hc,20, 130);
-ShowHr(Hr,200);
+ShowHc(Hc,pc, min_r);
+ShowHr(Hr,pr);
