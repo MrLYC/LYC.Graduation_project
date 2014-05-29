@@ -55,12 +55,18 @@ end
 disp(' ');
 disp('正在进行预处理...');
 img = preprocessing(img);
+figure('NumberTitle', 'off', 'Name', '预处理');
+imshow(img);
 
 disp('正在进行透视变换...');
 img = correct_img(img, dot);
+figure('NumberTitle', 'off', 'Name', '透视变换');
+imshow(img,[]);
 
 disp('正在进行提取边缘...');
 img = get_border(img, 3);
+figure('NumberTitle', 'off', 'Name', '提取边缘');
+imshow(img);
 
 figure('NumberTitle', 'off', 'Name', '检测结果');
 imshow(img);
